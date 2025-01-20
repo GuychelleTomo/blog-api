@@ -3,6 +3,7 @@ const path = require("path");
 const dotenv = require("dotenv");
 const errorHandler = require("./middlewares/errorHandler");
 const connectDB = require("./config/db");
+const cors = require("cors");
 
 // Route files
 const categoryRoute = require("./routes/categoryRoute");
@@ -16,6 +17,9 @@ dotenv.config({ path: "./config/config.env" });
 connectDB();
 
 const app = express();
+
+// security middleware
+app.use(cors());
 
 // Body parser
 app.use(express.json());
@@ -32,3 +36,4 @@ app.use("/api/v1/posts", postRoute);
 app.use(errorHandler);
 
 module.exports = app;
+ 
